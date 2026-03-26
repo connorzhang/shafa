@@ -1,0 +1,79 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">沙发蓝牙测试工具</text>
+    <text class="status {{connected ? 'connected' : ''}}">状态: {{statusText}}</text>
+  </view>
+
+  <view class="scan-section" wx:if="{{!connected}}">
+    <button type="primary" bindtap="startScan" loading="{{isScanning}}">扫描蓝牙设备</button>
+    
+    <scroll-view scroll-y="true" class="device-list" wx:if="{{devices.length > 0}}">
+      <view class="device-item" wx:for="{{devices}}" wx:key="deviceId" bindtap="connectDevice" data-id="{{item.deviceId}}" data-name="{{item.name}}">
+        <view class="device-info">
+          <text class="device-name">{{item.name || '未知设备'}}</text>
+          <text class="device-id">{{item.deviceId}}</text>
+        </view>
+        <text class="device-rssi">{{item.RSSI}}dBm</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="control-section" wx:if="{{connected}}">
+    <view class="device-connected-info">
+      <text>已连接: {{connectedDeviceName}}</text>
+      <button size="mini" type="warn" bindtap="disconnectDevice">断开</button>
+    </view>
+
+    <view class="service-select" wx:if="{{services.length > 0 && !selectedServiceId}}">
+      <text class="section-title">请选择一个服务 (Service UUID):</text>
+      <view class="uuid-list">
+        <view class="uuid-item" wx:for="{{services}}" wx:key="uuid" bindtap="selectService" data-uuid="{{item.uuid}}">
+          <text>{{item.uuid}}</text>
+          <text class="uuid-desc" wx:if="{{item.isPrimary}}">主服务</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="char-select" wx:if="{{selectedServiceId && characteristics.length > 0 && !selectedCharId}}">
+      <text class="section-title">请选择写入特征值 (Char UUID):</text>
+      <view class="uuid-list">
+        <view class="uuid-item {{item.properties.write ? 'can-write' : ''}}" wx:for="{{characteristics}}" wx:key="uuid" bindtap="selectChar" data-uuid="{{item.uuid}}" data-write="{{item.properties.write}}">
+          <text>{{item.uuid}}</text>
+          <text class="uuid-desc">
+            属性: {{item.properties.read ? '读 ' : ''}}{{item.properties.write ? '写 ' : ''}}{{item.properties.notify ? '通知 ' : ''}}
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <view class="test-panel" wx:if="{{selectedCharId}}">
+      <text class="section-title">发送测试数据 (Hex格式):</text>
+      
+      <view class="quick-buttons">
+        <button size="mini" bindtap="sendTestData" data-hex="FFFF000E0306000011000000002000000149">发控制包1</button>
+        <button size="mini" bindtap="sendTestData" data-hex="FFFF00050101000007">发初始化包</button>
+        <button size="mini" bindtap="sendTestData" data-hex="FFFF0005085D00006A">发心跳包</button>
+      </view>
+
+      <view class="custom-input">
+        <input class="hex-input" placeholder="输入Hex数据,如 FFFF000E..." value="{{customHex}}" bindinput="onHexInput"/>
+        <button type="primary" bindtap="sendCustomData" disabled="{{!customHex}}">发送</button>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="log-section">
+    <view class="log-header">
+      <text>运行日志:</text>
+      <button size="mini" bindtap="clearLogs">清空</button>
+    </view>
+    <scroll-view scroll-y="true" class="log-scroll" scroll-into-view="{{scrollToId}}">
+      <view class="log-item {{item.type}}" wx:for="{{logs}}" wx:key="id" id="log-{{item.id}}">
+        <text class="log-time">[{{item.time}}]</text>
+        <text class="log-msg">{{item.msg}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

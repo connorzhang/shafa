@@ -1,0 +1,14 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "projectname": "sofa-ble-test",
+  "description": "智能沙发蓝牙测试工具",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram"
+}

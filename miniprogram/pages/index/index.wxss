@@ -1,0 +1,203 @@
+/* pages/index/index.wxss */
+.container {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.status {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.status.connected {
+  color: #07c160;
+  font-weight: bold;
+}
+
+.scan-section {
+  margin-bottom: 20rpx;
+}
+
+.device-list {
+  margin-top: 20rpx;
+  height: 400rpx;
+  border: 1px solid #eee;
+  border-radius: 8rpx;
+}
+
+.device-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1px solid #f5f5f5;
+  background-color: #fff;
+}
+
+.device-item:active {
+  background-color: #f0f0f0;
+}
+
+.device-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.device-name {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.device-id {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 4rpx;
+}
+
+.device-rssi {
+  font-size: 28rpx;
+  color: #ff976a;
+}
+
+.control-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.device-connected-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f0f9eb;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.uuid-list {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.uuid-item {
+  padding: 20rpx;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+.uuid-item:active {
+  background: #f9f9f9;
+}
+
+.can-write {
+  color: #07c160;
+}
+
+.uuid-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.custom-input {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.hex-input {
+  flex: 1;
+  height: 80rpx;
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-family: monospace;
+}
+
+.log-section {
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8rpx;
+  background: #f8f8f8;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  background: #eee;
+  font-size: 26rpx;
+}
+
+.log-scroll {
+  flex: 1;
+  padding: 10rpx;
+  height: 0;
+}
+
+.log-item {
+  font-size: 24rpx;
+  font-family: monospace;
+  margin-bottom: 8rpx;
+  word-break: break-all;
+}
+
+.log-time {
+  color: #999;
+  margin-right: 10rpx;
+}
+
+.log-msg {
+  color: #333;
+}
+
+.log-item.rx .log-msg {
+  color: #07c160;
+}
+
+.log-item.tx .log-msg {
+  color: #1989fa;
+}
+
+.log-item.err .log-msg {
+  color: #ee0a24;
+}
